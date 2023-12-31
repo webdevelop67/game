@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Space Game</title>
+    <style>
+        body {
+    margin: 0;
+    overflow: hidden;
+    display: flex; 
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.background {
+    border-radius: 20px;
+    position: relative;
+    width: 360px;
+    height: 600px;
+    background-image: url(background.jpg);
+    /* background-color: black; */
+    background-repeat: no-repeat; 
+    background-size: cover;
+    padding: 5px;
+    overflow: hidden;
+}
+
+
+
+ .planet {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    /* background-color: #fff; */
+    background-image: url(ball.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+
+.bullet{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    background-image: url(fire.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    top: 530px;
+    left: 172px;
+    transform: rotate(133deg);
+}
+.spaceship {
+    top: 490px;
+    margin-left:  137px;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    background-image: url(space.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="background" >
+        <div class="bullet" id="fire"></div>
+        <div class="spaceship" id="space"></div>
+        <div class="planet" id="di"></div>
+        <div style=" width: 50px; height: 180px; margin-top: 200px;" id="side"></div>
+    </div>
+    
+    <script>
+        var di = document.getElementById("di");
+        var dix = 0;
+        var dir = "left";
+
+        function move(){
+            requestAnimationFrame(move)
+            if(dir === "left"){
+                dix += 5;
+                di.style.marginLeft = dix +"px";
+                if(dix == 300){
+                    dir = "right";
+                }
+            }
+            else{
+                dix -= 5;
+                di.style.marginLeft = dix +"px";
+                if(dix == 0){
+                    dir = "left";
+                }
+            }
+        }
+        move()
+
+        // var spc = document.getElementById("space");
+        // var spcx = 137;
+        // var spcdir = "left"
+
+        // function spaceship(){
+        //     requestAnimationFrame(spaceship)
+        //     if(spcdir === "left"){
+        //         spcx += 1;
+        //         spc.style.marginLeft = spcx +"px";
+        //         if(spcx == 270){
+        //             spcdir = "right";
+        //         }
+        //     }
+        //     else{
+        //         spcx -= 1;
+        //         spc.style.marginLeft = spcx +"px";
+        //         if(spcx == 0){
+        //             spcdir = "left";
+        //         }
+        //     }
+        // }
+        // spaceship()
+
+        var fire = document.getElementById("fire");
+        var firx = 0;
+        var firy = 0;
+        var firdir = "left";
+        var fir = false;
+        var attempt = 6;
+        var imgurl = "space.png";
+        var side = document.getElementById('side');
+
+
+
+        function bullet(){
+            requestAnimationFrame(bullet)
+            // if(firdir === "left"){
+            //     firx += 1;
+            //     fire.style.marginLeft = firx +"px";
+            //     if(firx == 133){
+            //         firdir = "right";
+            //     }
+            // }
+            // else{
+            //     firx -= 1;
+            //     fire.style.marginLeft = firx +"px";
+            //     if(firx == -136){
+            //         firdir = "left";
+            //     }
+            // }
+
+            if(fir){
+                    // if(firdir === "down"){
+                    firy -= 10;
+                    fire.style.marginTop = firy +"px";
+                    if(dix > 120 && dix < 200 && firy < -450 && firy > -550 ){
+                        document.write("you won");
+                        fir = false;
+                        
+                    }
+                    else{
+                        // document.write("you lost")
+                    }
+                    // }
+                }
+                   
+                
+              
+                document.addEventListener('keydown',function(event){
+                    
+
+                if(event.key === ' '){
+                    
+                    fir = true;
+                    if(firy < -550){
+
+                        fir = false;
+                        firy = 0;
+                    fire.style.marginTop = firy +"px";
+                    attempt--;
+
+                        // -----------------------------------
+                        var imgElement = document.createElement('img');
+                        imgElement.src = "space.png";
+                        imgElement.style.width = "40px";
+                        imgElement.style.height = "34px"
+                        side.appendChild(imgElement);
+
+
+
+
+
+// -------------------------------------------------------------
+
+                    if(attempt == 0){
+                        document.write("You lost your attempt = " + attempt);
+                    }
+
+                }
+                    
+                }
+                
+            });
+            // for(var i= attempt; i > 0; i--){
+
+// break;
+// }
+        }
+        bullet()
+        
+        
+        // -------------------------
+
+        // function bullet(){
+        //     requestAnimationFrame(bullet)
+            
+            
+            
+        //         if(fir){
+        //             if(firdir === "down"){
+        //             firx -= 1;
+        //             fire.style.marginTop = firx +"px";
+                    
+        //             }
+        //         }
+              
+        //         document.addEventListener('keydown',function(event){
+        //         if(event.key === ' '){
+        //             fir = true;
+        //         }
+        //     });
+        //     }
+        //     bullet()
+
+
+    </script>
+</body>
+</html>
